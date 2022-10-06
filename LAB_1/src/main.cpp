@@ -16,6 +16,7 @@
 
 #include "shaders/intersectionshader.h"
 #include "shaders/depthshader.h"
+#include "shaders/normalshader.h"
 
 
 
@@ -97,7 +98,7 @@ void raytrace(Camera* &cam, Shader* &shader, Film* &film,
     for(size_t lin=0; lin<resY; lin++)
     {
         // Show progression
-        if ( lin%(resY/sizeBar) == 0)
+        if (lin%(resY/sizeBar) == 0)
             std::cout << ".";
 
         // Inner loop invariant: we have rendered col columns
@@ -138,7 +139,7 @@ void PaintImage(Film* film)
         for (size_t col = 0; col < resX; col++)
         {
             //CHANGE...()            
-            Vector3D random_color = Vector3D((double)col / resX, (double)lin / resY, 0);
+            Vector3D random_color = Vector3D((double)col / resX, (double)lin / resY, (double)0);
             film->setPixelValue(col,lin, random_color);
            
         }
@@ -159,8 +160,12 @@ int main()
     // Declare the shader
     Vector3D bgColor(0.0, 0.0, 0.0); // Background color (for rays which do not intersect anything)
     Vector3D intersectionColor(0,1,0);
+    Vector3D color(0,1,0);
+    double maxDist(10);
     
-    Shader* shader = new DepthShader(Vector3D(0.4, 1, 0.4), 7, bgColor);
+    //Shader *shader = new IntersectionShader (intersectionColor, bgColor);
+    //Shader *shader = new DepthShader (color, maxDist, bgColor);
+    Shader *shader = new NormalShader (color, maxDist, bgColor);
   
 
     // Build the scene---------------------------------------------------------
@@ -175,7 +180,7 @@ int main()
     //---------------------------------------------------------------------------
 
     //Paint Image ONLY TASK 1
-    PaintImage(film);
+    //PaintImage(film);
 
     // Launch some rays! TASK 2,3,...
     // 

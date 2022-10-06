@@ -91,7 +91,7 @@ bool Sphere::rayIntersect(const Ray &ray, Intersection &its) const
     its.itsPoint = objectToWorld.transformPoint(itsPoint);
 
     // Compute the normal at the intersection point (in world coordinates)
-    its.normal   = getNormalWorld(its.itsPoint);
+    its.normal = getNormalWorld(its.itsPoint);
 
     // Store the shape the intersection point lies in
     its.shape = this;

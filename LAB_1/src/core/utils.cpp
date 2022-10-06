@@ -16,17 +16,16 @@ Vector3D Utils::multiplyPerCanal(const Vector3D &v1, const Vector3D &v2)
 
 bool Utils::hasIntersection(const Ray& cameraRay, const std::vector<Shape*>& objectsList) //or Shadow Ray
 {
-    
+    //std::cout << "Need to implement the function Utils::hasIntersection() in the file utils.cpp" << std::endl;
+
     // For each object on the scene...
     for(size_t objIndex = 0; objIndex < objectsList.size(); objIndex ++)
     {
           // Get the current object
           const Shape *obj = objectsList.at(objIndex);
-          if (obj->rayIntersectP(cameraRay) == true) {
+          if (obj->rayIntersectP(cameraRay))
               return true;
-          }
     }
-
     return false;
 }
 
@@ -34,15 +33,15 @@ bool Utils::hasIntersection(const Ray& cameraRay, const std::vector<Shape*>& obj
 
 bool Utils::getClosestIntersection(const Ray& cameraRay, const std::vector<Shape*>& objectsList, Intersection& its) //or Closest Hit Ray
 {
+    //std::cout << "Need to implement the function Utils::getClosestIntersection() in the file utils.cpp" << std::endl;
 
-    for (size_t objIndex = 0; objIndex < objectsList.size(); objIndex++)
+    // For each object on the scene...
+    for(size_t objIndex = 0; objIndex < objectsList.size(); objIndex ++)
     {
         // Get the current object
-        const Shape* obj = objectsList.at(objIndex);
-        if (obj->rayIntersect(cameraRay, its) == true)
-        {
+        const Shape *obj = objectsList.at(objIndex);
+        if (obj->rayIntersect(cameraRay, its))
             return true;
-        }
     }
     return false;
 }
@@ -104,7 +103,7 @@ Vector3D Utils::computeTransmissionDirection(const Ray &r, const Vector3D &norma
                                              const double &eta, const double &cosThetaI,
                                              const double &cosThetaT)
 {
-    return r.d * eta + normal * (eta*cosThetaI - cosThetaT);;
+    return r.d * eta + normal * (eta*cosThetaI - cosThetaT);
 }
 
 double Utils::computeReflectanceCoefficient(const double &eta, const double &cosThetaI,

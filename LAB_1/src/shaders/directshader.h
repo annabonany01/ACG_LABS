@@ -1,13 +1,13 @@
-#ifndef DEPTHSHADER_H
-#define DEPTHSHADER_H
+#ifndef DIRECTSHADER_H
+#define DIRECTSHADER_H
 
 #include "shader.h"
 
-class DepthShader : public Shader
+class DirectShader : public Shader
 {
 public:
-    DepthShader();
-    DepthShader(Vector3D color_, double maxDist_, Vector3D bgColor_);
+    DirectShader();
+    DirectShader(Vector3D color_, double maxDist_, Vector3D bgColor_);
 
     virtual Vector3D computeColor(const Ray &r,
                              const std::vector<Shape*> &objList,
@@ -19,4 +19,4 @@ public:
 };
 
 
-#endif // DEPTHSHADER_H
+#endif // DIRECTSHADER_H

@@ -1,13 +1,13 @@
-#ifndef DEPTHSHADER_H
-#define DEPTHSHADER_H
+#ifndef NORMALSHADER_H
+#define NORMALSHADER_H
 
 #include "shader.h"
 
-class DepthShader : public Shader
+class NormalShader : public Shader
 {
 public:
-    DepthShader();
-    DepthShader(Vector3D color_, double maxDist_, Vector3D bgColor_);
+    NormalShader();
+    NormalShader(Vector3D color_, double maxDist_, Vector3D bgColor_);
 
     virtual Vector3D computeColor(const Ray &r,
                              const std::vector<Shape*> &objList,
@@ -19,4 +19,4 @@ public:
 };
 
 
-#endif // DEPTHSHADER_H
+#endif // NORMALSHADER_H

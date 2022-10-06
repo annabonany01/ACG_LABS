@@ -3,13 +3,14 @@
 
 #include <string>
 #include <sstream>
+#include <cmath>
 
 #include "vector3d.h"
 
 #define Epsilon (double)1e-4
 
 // Note: the "mutable" keyword allows to change a class instance
-// poperty even if the instance is declared as "const"
+// property even if the instance is declared as "const"
 class Ray
 {
 public:
