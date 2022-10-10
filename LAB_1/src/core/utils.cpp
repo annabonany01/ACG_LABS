@@ -10,7 +10,6 @@ double Utils::degreesToRadians(double degrees)
 
 Vector3D Utils::multiplyPerCanal(const Vector3D &v1, const Vector3D &v2)
 {
-    //return Vector3D(v1.x*v2.x, v1.y*v2.y, v1.z*v2.z);
     return Vector3D(0.0);
 }
 
@@ -19,10 +18,9 @@ bool Utils::hasIntersection(const Ray& cameraRay, const std::vector<Shape*>& obj
     //std::cout << "Need to implement the function Utils::hasIntersection() in the file utils.cpp" << std::endl;
 
     // For each object on the scene...
-    for(size_t objIndex = 0; objIndex < objectsList.size(); objIndex ++)
+    for(auto obj : objectsList)
     {
           // Get the current object
-          const Shape *obj = objectsList.at(objIndex);
           if (obj->rayIntersectP(cameraRay))
               return true;
     }
@@ -35,15 +33,14 @@ bool Utils::getClosestIntersection(const Ray& cameraRay, const std::vector<Shape
 {
     //std::cout << "Need to implement the function Utils::getClosestIntersection() in the file utils.cpp" << std::endl;
 
+    bool hasIntersect = false;
     // For each object on the scene...
-    for(size_t objIndex = 0; objIndex < objectsList.size(); objIndex ++)
-    {
+    for(auto obj : objectsList) {
         // Get the current object
-        const Shape *obj = objectsList.at(objIndex);
         if (obj->rayIntersect(cameraRay, its))
-            return true;
+            hasIntersect = true;
     }
-    return false;
+    return hasIntersect;
 }
 
 double interpolate(double val, double y0, double x0, double y1, double x1 )
