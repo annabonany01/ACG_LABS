@@ -1,12 +1,11 @@
 #include "phong.h"
 #include <iostream>
 
+#include "../core/utils.h"
 
-Phong::Phong()
-{ }
 
-Phong::Phong(Vector3D kd_, Vector3D ks_):
-    Material(), kd(kd_), ks(ks_)
+Phong::Phong(const Vector3D& kd_, const Vector3D& ks_, const double s_):
+    Material(), kd(kd_), ks(ks_), s(s_)
 { }
 
 double Phong::getIndexOfRefraction() const
@@ -19,10 +18,23 @@ double Phong::getIndexOfRefraction() const
 
 Vector3D Phong::getReflectance(const Vector3D &n, const Vector3D &wo, const Vector3D &wi) const
 {
-    // ωr =2(n·ωi)n−ωi
-    Vector3D wr = Vector3D(2.0) * dot(n, wi) - wi;
-    // r(ωi,ωo)=kd(ωi ·n)+ks(ωo ·ωr)n,
-    Vector3D reflectance = kd * dot(wi, n) + ks * dot(wo, wr) * n;
+    Vector3D wr = Utils::computeReflectionDirection(wi, n);
+    Vector3D reflectance = kd * dot(wi, n) + ks * pow(dot(wo, wr), s);
 
     return reflectance;
+}
+
+bool Phong::hasSpecular() const
+{
+    return false;
+}
+
+bool Phong::hasTransmission() const
+{
+    return false;
+}
+
+bool Phong::hasDiffuseOrGlossy() const
+{
+    return true;
 }
