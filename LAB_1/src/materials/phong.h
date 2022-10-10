@@ -2,6 +2,7 @@
 #define PHONG
 
 #include "material.h"
+#include "stdlib.h"
 
 class Phong : public Material
 {
