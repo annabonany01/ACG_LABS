@@ -26,16 +26,15 @@ Vector3D DirectShader::computeColor(const Ray &r, const std::vector<Shape*> &obj
                 Ray rr;
                 rr.o = its.itsPoint;
                 rr.d = wi;
-                //rr.depth = 0.0;
-                //rr.minT = 0.0001;
+                rr.depth = 0.0;
+                rr.minT = Epsilon;
                 rr.maxT = (light.getPosition() - its.itsPoint).length();
 
                 if (!Utils::hasIntersection(rr, objList))
                 {
-
                     Vector3D wr = its.shape->getMaterial().getReflectance(its.normal, wo, wi);
                     //std::cout << " " << wr; break;
-                    new_color += Utils::multiplyPerCanal(Li, wr);
+                    new_color += Li * wr;
                 }
             }
         }
